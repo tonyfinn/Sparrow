@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link href="style.css" rel="stylesheet" type="text/css">
+		<script src="js/jquery.js"></script>
+		<script src="js/modernizr.js"></script>
+		<script src="js/markdown.js"></script>
+		<script src="js/main.js"></script>
+		<title>Javascript Wiki Test Page</title>
+	</head>
+	<body>
+		<h1>Javascript Wiki</h1>
+		<div id="page-sel-div">
+			<form id="page-select" action="javascript:void">
+				<input id="page-name">
+				<input type="submit" value="Go">
+			</form>
+		</div>
+		<div id="current-page">
+			No page is currently loaded.
+		</div>
+		<hr>
+		<p id="edit-container">
+			<a id="edit-link">Edit Page</a>
+		</p>
+
+		<form id="page-edit" action="javascript:void">
+			<textarea id="page-edit-content" cols="80" rows="30"></textarea><br>
+			<input type="submit" value="Save">
+		</form>
+
+		<div id="export">
+		</div>
+	</body>
+</html>

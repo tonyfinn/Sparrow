@@ -22,3 +22,32 @@ body {
 	padding: 3em;
 	background:#fff;
 }
+#notification-bar {
+	padding: 0.5em;
+	margin: 1em 0;
+	display: none;
+}
+.success {
+	border: 1px solid green;
+	background: #2f7;
+}
+.warning {
+	border:1px solid #ff9966;
+	background: #fca;
+}
+.error {
+	border: 1px solid #f00;
+	background: #f99;
+}
+#current-page {
+	margin: 1em 0;
+}
+#page-select input {
+	padding: 0.3em;
+	font-size: 1.2em;
+}
+#page-select input[type=submit] {
+	border: 1px solid black;
+	background-color: #059;
+	color: white;
+}

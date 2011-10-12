@@ -3,7 +3,7 @@ server-side code, and no Flash or Java kludges to store data. It is
 using HTML5's localStorage as it's primary data source.
 
 ###Limitations
-* Some browsers implement a size limit on localStorage. It can only store
+* Browsers implement a 5MB size limit on localStorage. It can only store
 as many pages as fit into that limit. Apparently in the future it will
 be possible for apps to request more space, but no current browser
 implements this.
@@ -12,7 +12,7 @@ implements this.
   for now all data stored in it is temporary.
 
 ###Support
-Currently, it works on Chrome, and theoretically works on Safari though
+Currently, it works on Chrome, the Android browser and Opera, and theoretically works on Safari though
 I have not tested that yet. It works on Firefox 4+ when served from a web
 server, as Firefox does not persist localStorage when the page is opened
 on a file:// url due to sandboxing concerns. It does not work on IE, any

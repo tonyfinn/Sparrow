@@ -18,7 +18,7 @@ var jswiki = new (function() {
 	this.get_page = function(name) {
 		var page = this.pages[name];
 		if(page == null || page == undefined) {
-			this.save_page(name, '');
+			return "";
 		}
 		page = this.pages[name];
 		return page;
@@ -30,31 +30,66 @@ var jswiki = new (function() {
 	}
 
 	this.load_hash_page = function() {
+		this.set_editing_mode(false);
 		var page_name = window.location.hash.substr(1);
-		$('#page-name').val(page_name);
-		this.load_page(page_name);
+		if(page_name.substr(0, 1) == '/') {
+			this.load_special_page(page_name.substr(1));
+		} else {
+			$('#page-name').val(page_name);
+			this.load_page(page_name);
+		}
 	}
 
-	this.load_page = function(name) {
+	this.load_special_page = function(name) {
+		if(name.indexOf('edit/') == 0) {
+			this.load_edit_page(name.substr(5))
+		} else if(name.indexOf('settings/') == 0) {
+			this.load_settings_page();
+		} 
+	};
+
+	this.load_edit_page = function(name) {
+		this.load_page(name, false);
+		this.set_editing_mode(true);
+	}
+
+	this.load_page = function(name, update_hash) {
+		if(typeof update_hash == "undefined") {
+			update_hash = true;
+		}
 		var contents = this.get_page(name);
 		var html_contents = this.get_html_page(name);
 		$('#current-page').html(html_contents);
 		$('#page-name').val(name);
 		$('#page-edit-content').val(contents);
-		window.location.hash = '#' + name;
+		if(update_hash) {
+			window.location.hash = '#' + name;
+		}
+	};
+
+	this.load_settings_page = function() {
+		this.set_editing_mode(false);
+		$('#current-page').html(
+			"No settings yet. <a href=\"#\">Leave the settings page</a>"
+		);
 	};
 
 	this.save_page = function(name, content) {
 		this.pages[name] = content;
-		this.load_page(name);
 		this.save_all();
-		this.set_editing_mode(false);
 	};
 
 	this.set_editing_mode = function(editing) {
 		$('#current-page').toggle(!editing);
-		$('#page-edit').toggle(editing);
-		$('#edit-container').toggle(!editing);
+		$('#editing-container').toggle(editing);
+		$('#edit-link-container').toggle(!editing);
+	}
+	this.add_notification = function(level, message) {
+		$('#notification-bar').addClass(level).html(message).show();
+	}
+
+	this.clear_notifications = function() {
+		$('#notification-bar').html('').hide();
 	}
 
 	this.edit_page = function() {
@@ -68,23 +103,37 @@ var jswiki = new (function() {
 	this.set_editing_mode(false);
 
 	$(document).ready(function() {
+		if(!Modernizr.localstorage) {
+			jswiki.add_notification('error', 'Please use a browser that supports HTML5 localStorage');
+		}
 		$('#page-select').submit(function(evt) {
 			var pagename = $('#page-name').val();
 			jswiki.load_page(pagename);
 			return false;
 		});
+		$('#cancel-edit').click(function(evt) {
+			jswiki.set_editing_mode(false);
+			window.location.hash = '#' + window.location.hash.substr(7);
+		});
 		$('#page-edit').submit(function(evt) {
 			var pagename = $('#page-name').val();
 			var contents = $('#page-edit-content').val();
 			jswiki.save_page(pagename, contents);
+			jswiki.set_editing_mode(false);
+			jswiki.load_page(pagename);
 			return false;
 		});
-		$(window).bind('hashchange', function(e) { 
+		$('#notification-close').click(function(evt) {
+			this.clean_notifications();
+		});
+		$(window).bind('hashchange', function(evt) { 
 			jswiki.load_hash_page();
 		});
 		$('#edit-link').click(function() {
+			window.location.hash = "#:edit/" + window.location.hash.substr(1)
 			jswiki.set_editing_mode(true);
 		});
 		jswiki.set_editing_mode(false);
+		jswiki.clear_notifications();
 	});
 })();

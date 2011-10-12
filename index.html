@@ -17,18 +17,24 @@
 				<input type="submit" value="Go">
 			</form>
 		</div>
+		<div id="notification-bar">
+		</div>
 		<div id="current-page">
 			No page is currently loaded.
 		</div>
 		<hr>
-		<p id="edit-container">
+		<p id="edit-link-container">
 			<a id="edit-link">Edit Page</a>
 		</p>
 
-		<form id="page-edit" action="javascript:void">
-			<textarea id="page-edit-content" cols="80" rows="30"></textarea><br>
-			<input type="submit" value="Save">
-		</form>
+		<div id="editing-container">
+			<h2>Edit Page</h2>
+			<form id="page-edit" action="javascript:void">
+				<textarea id="page-edit-content" cols="80" rows="30"></textarea><br>
+				<input type="button" id="cancel-edit" value="Cancel">
+				<input type="submit" value="Save">
+			</form>
+		</div>
 
 		<div id="export">
 		</div>

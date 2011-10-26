@@ -130,7 +130,7 @@ var jswiki = new (function() {
 			jswiki.load_hash_page();
 		});
 		$('#edit-link').click(function() {
-			window.location.hash = "#:edit/" + window.location.hash.substr(1)
+			window.location.hash = "#/edit/" + window.location.hash.substr(1)
 			jswiki.set_editing_mode(true);
 		});
 		jswiki.set_editing_mode(false);

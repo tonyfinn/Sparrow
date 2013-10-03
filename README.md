@@ -30,8 +30,8 @@ implements this.
 Currently, it works on Chrome, the Android browser and Opera, and theoretically works on Safari though
 I have not tested that yet. It works on Firefox 4+ when served from a web
 server, as Firefox does not persist localStorage when the page is opened
-on a file:// url due to sandboxing concerns. It does not work on IE, any
-version.
+on a file:// url due to sandboxing concerns. It does not work on IE < 10, and has not
+been tested on IE 10.
 
 ###Formatting
 The formatting is done using Markdown. More specifically, it is rendered

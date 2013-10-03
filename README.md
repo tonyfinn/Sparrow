@@ -1,6 +1,21 @@
-The idea of this is to create a wiki that works with pure JS. No
-server-side code, and no Flash or Java kludges to store data. It is
-using HTML5's localStorage as it's primary data source.
+The idea of this is to create a wiki that works with pure Javascript. No
+server-side code, and no Flash or Java kludges to store data. It uses
+HTML5's localStorage API as it's primary data source. It was mostly an experiment
+with the localStorage API, as a more usable version would provide some way
+to export/import data to keep it in the case of history being cleared, or to move
+data from one computer to another.
+
+###Usage instructions
+#### Starting
+1. Download the [latest version](https://github.com/tonyfinn/Sparrow/archive/master.zip)
+2. Unzip it to a location of your choice.
+3. Open index.html using a web browser.
+
+#### Editing
+1. Choose the page you wish to edit by entering it's name in the box at the top of the page.
+2. Click Go.
+3. Click the Edit link at the bottom of the page.
+
 
 ###Limitations
 * Browsers implement a 5MB size limit on localStorage. It can only store
